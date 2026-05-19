@@ -16,17 +16,67 @@ body{
 
 /* ПЛИТКА ИЗ КРИПОВЫХ ЛИЦ */
 
+/* ЖИВАЯ СТЕНА */
+
 #tileWall{
     position:fixed;
-    inset:-10%;
+    inset:-20%;
     display:grid;
-    grid-template-columns:repeat(7,1fr);
+    grid-template-columns:repeat(9,1fr);
     gap:0;
     z-index:0;
+    transform:scale(1.12);
+    animation:
+        wallDrift 35s linear infinite,
+        wallBreath 9s ease-in-out infinite;
+}
+
+.tile{
+    background-size:cover;
+    background-position:center;
+    height:180px;
+    opacity:.52;
     filter:
-        brightness(.35)
-        contrast(1.6)
-        saturate(.4);
+        brightness(.45)
+        contrast(1.5)
+        saturate(.55)
+        blur(.25px);
+
+    transition:
+        transform 1.8s ease,
+        opacity 1.8s ease,
+        filter 1.8s ease;
+
+    animation:
+        tileFloat 7s ease-in-out infinite;
+}
+
+/* ПЛИТКИ НЕ СТОЯТ */
+
+.tile:nth-child(odd){
+    animation-duration:8s;
+}
+
+.tile:nth-child(3n){
+    animation-duration:11s;
+}
+
+.tile:nth-child(4n){
+    animation-duration:9s;
+}
+
+/* ПОСЛЕ КЛИКА */
+
+body.horror .tile{
+    opacity:.82;
+    filter:
+        brightness(.55)
+        contrast(2)
+        saturate(.8);
+
+    animation:
+        tileGlitch .18s infinite,
+        tileFloat 1.2s infinite;
 }
 
 .tile{
