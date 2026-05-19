@@ -1,55 +1,49 @@
-const btn=document.getElementById("portalBtn");
-const layer=document.getElementById("eyesLayer");
-const whispers=document.querySelectorAll(".whispers span");
+const images=[
+"img/fuck1.jpg",
+"img/fuck2.jpg",
+"img/fuck3.jpg",
+"img/fuck4.jpg",
+"img/fuck5.jpg",
+"img/fuck6.jpg",
+"img/fuck7.jpg",
+"img/fuck8.jpg",
+    
+];
 
-/* СОЗДАЁМ ГЛАЗА */
+const wall=document.getElementById("tileWall");
 
-for(let i=0;i<42;i++){
+for(let i=0;i<70;i++){
 
-    const eye=document.createElement("div");
-    eye.className="eye";
+    const d=document.createElement("div");
+    d.className="tile";
 
-    eye.style.left=Math.random()*100+"vw";
-    eye.style.top=Math.random()*100+"vh";
+    d.style.backgroundImage=
+        `url(${images[
+            Math.floor(Math.random()*images.length)
+        ]})`;
 
-    const s=60+Math.random()*90;
-
-    eye.style.width=s+"px";
-    eye.style.height=s/2+"px";
-
-    eye.style.opacity=.25+Math.random()*.5;
-
-    layer.appendChild(eye);
+    wall.appendChild(d);
 }
 
-/* ШЕПОТ */
+/* ТВ ШУМ */
 
-setInterval(()=>{
+const audio=new Audio(
+"https://actions.google.com/sounds/v1/alarms/tv_static.ogg"
+);
 
-    whispers.forEach(w=>{
+const btn=document.getElementById("portalBtn");
 
-        const dx=(Math.random()*40)-20;
-        const dy=(Math.random()*40)-20;
-
-        w.style.transform=
-            `translate(${dx}px,${dy}px)`;
-
-    });
-
-},1200);
-
-/* КЛИК */
-
-btn.addEventListener("click",()=>{
+btn.onclick=()=>{
 
     document.body.classList.add("horror");
 
-    btn.disabled=true;
+    audio.volume=.35;
+    audio.play();
+
     btn.innerText="они смотрят";
 
     setTimeout(()=>{
         window.location.href=
-            "https://t.me/cemaxa";
+        "https://t.me/cemaxa";
     },3000);
-
-});
+};
