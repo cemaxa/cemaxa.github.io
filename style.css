@@ -177,6 +177,8 @@ body.horror .tile{
 .whispers span:nth-child(4){top:85%;left:10%;}
 .whispers span:nth-child(5){top:45%;left:80%;}
 
+
+
 /* КНОПКА */
 
 .container{
@@ -213,29 +215,70 @@ body.horror .portal-btn{
     animation:pulse .6s infinite;
 }
 
-@keyframes noise{
-    50%{transform:translate(2px,-2px)}
-}
+@keyframes wallDrift{
 
-@keyframes fog{
-    to{
-        transform:translate(5%,3%);
+    0%{
+        transform:
+            translate(0,0)
+            scale(1.12);
+    }
+
+    50%{
+        transform:
+            translate(-3%,-2%)
+            scale(1.15);
+    }
+
+    100%{
+        transform:
+            translate(3%,2%)
+            scale(1.12);
     }
 }
 
-@keyframes flicker{
+@keyframes wallBreath{
+
+    0%,100%{
+        filter:brightness(1);
+    }
+
     50%{
-        opacity:.75;
+        filter:brightness(1.08);
     }
 }
 
-@keyframes shake{
-    25%{transform:translate(2px,-2px)}
-    50%{transform:translate(-2px,2px)}
+@keyframes tileFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translateY(-6px)
+            scale(1.03);
+    }
 }
 
-@keyframes pulse{
+@keyframes tileGlitch{
+
+    25%{
+        transform:
+            translate(2px,-2px)
+            rotate(.4deg);
+    }
+
     50%{
-        box-shadow:0 0 80px red;
+        transform:
+            translate(-3px,2px)
+            rotate(-.4deg);
+    }
+
+    75%{
+        transform:
+            translate(1px,-1px)
+            rotate(.3deg);
     }
 }
