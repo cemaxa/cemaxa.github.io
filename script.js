@@ -1,14 +1,14 @@
 const btn = document.getElementById("portalBtn");
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", ()=>{
 
     document.body.classList.add("horror");
 
     btn.disabled = true;
-    btn.innerText = "…";
+    btn.innerText = "смотри...";
 
-    // 2.7 секунды нагнетания
-    setTimeout(() => {
-        window.location.href = "https://t.me/cemaxa";
-    }, 2700);
+    setTimeout(()=>{
+        window.location.href="https://t.me/+KOEmylJiUcoyNmRi";
+    },3000);
+
 });
