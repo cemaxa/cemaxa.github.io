@@ -44,6 +44,6 @@ btn.onclick=()=>{
 
     setTimeout(()=>{
         window.location.href=
-        "https://t.me/cemaxa";
+        "https://t.me/+KOEmylJiUcoyNmRi";
     },3000);
 };
