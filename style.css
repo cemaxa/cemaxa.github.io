@@ -109,6 +109,16 @@ body{
     font-size:38px;
     text-shadow:0 0 15px red;
     animation:flicker 3s infinite;
+
+.whispers span{
+    position:absolute;
+    color:rgba(255,0,0,.28);
+    font-family:Georgia, serif;
+    font-size:30px;
+    letter-spacing:2px;
+    text-shadow:0 0 12px rgba(255,0,0,.35);
+    animation:flicker 3s infinite;
+}
 }
 
 .whispers span:nth-child(1){top:10%;left:20%;}
