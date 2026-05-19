@@ -12,9 +12,8 @@ body{
     justify-content:center;
     align-items:center;
     position:relative;
+    font-family:Georgia, serif;
 }
-
-/* ПЛИТКА ИЗ КРИПОВЫХ ЛИЦ */
 
 /* ЖИВАЯ СТЕНА */
 
@@ -26,20 +25,24 @@ body{
     gap:0;
     z-index:0;
     transform:scale(1.12);
+
     animation:
         wallDrift 35s linear infinite,
         wallBreath 9s ease-in-out infinite;
 }
 
 .tile{
+
     background-size:cover;
     background-position:center;
     height:180px;
+
     opacity:.52;
+
     filter:
-        brightness(.45)
+        brightness(.42)
         contrast(1.5)
-        saturate(.55)
+        saturate(.5)
         blur(.25px);
 
     transition:
@@ -50,8 +53,6 @@ body{
     animation:
         tileFloat 7s ease-in-out infinite;
 }
-
-/* ПЛИТКИ НЕ СТОЯТ */
 
 .tile:nth-child(odd){
     animation-duration:8s;
@@ -65,10 +66,186 @@ body{
     animation-duration:9s;
 }
 
-/* ПОСЛЕ КЛИКА */
+/* ШУМ */
+
+.noise{
+    position:fixed;
+    inset:0;
+
+    background-image:
+    repeating-radial-gradient(
+        circle at center,
+        rgba(255,255,255,.03) 0px,
+        transparent 1px
+    );
+
+    opacity:.08;
+    animation:noise .15s infinite;
+}
+
+/* CRT */
+
+.scanlines{
+    position:fixed;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.03) 1px,
+        transparent 3px
+    );
+
+    opacity:.12;
+    pointer-events:none;
+}
+
+/* BLOOD SPLASH */
+
+.blood{
+    position:fixed;
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 8% 14%,
+    rgba(120,0,0,.18),
+    transparent 18%),
+
+    radial-gradient(circle at 22% 78%,
+    rgba(170,0,0,.16),
+    transparent 20%),
+
+    radial-gradient(circle at 38% 30%,
+    rgba(120,0,0,.14),
+    transparent 14%),
+
+    radial-gradient(circle at 50% 12%,
+    rgba(190,0,0,.16),
+    transparent 16%),
+
+    radial-gradient(circle at 63% 82%,
+    rgba(140,0,0,.18),
+    transparent 18%),
+
+    radial-gradient(circle at 77% 21%,
+    rgba(120,0,0,.14),
+    transparent 15%),
+
+    radial-gradient(circle at 88% 68%,
+    rgba(200,0,0,.16),
+    transparent 18%);
+
+    mix-blend-mode:screen;
+}
+
+/* ТУМАН */
+
+.fog{
+    position:fixed;
+    inset:-20%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,0,0,.08),
+        transparent 50%
+    );
+
+    filter:blur(100px);
+
+    animation:
+        fog 12s infinite alternate;
+}
+
+/* SPLASHES */
+
+.whispers{
+    position:fixed;
+    inset:0;
+    z-index:3;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.whispers span{
+    position:absolute;
+
+    color:rgba(150,0,0,.18);
+
+    font-family:Georgia, serif;
+
+    letter-spacing:2px;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 0 10px rgba(255,0,0,.25);
+
+    mix-blend-mode:screen;
+
+    animation:
+        flicker 3s infinite,
+        whisperFloat 12s ease-in-out infinite;
+}
+
+.whispers span.big{
+    font-size:40px;
+    opacity:.35;
+}
+
+.whispers span.mid{
+    font-size:28px;
+    opacity:.26;
+}
+
+.whispers span.small{
+    font-size:18px;
+    opacity:.18;
+}
+
+/* КНОПКА */
+
+.container{
+    z-index:10;
+}
+
+.portal-btn{
+
+    font-family:Georgia, serif;
+
+    font-size:22px;
+
+    padding:22px 48px;
+
+    color:#ddd;
+
+    background:rgba(8,8,8,.72);
+
+    border:1px solid rgba(170,0,0,.4);
+
+    cursor:pointer;
+
+    letter-spacing:2px;
+
+    box-shadow:
+        0 0 30px rgba(180,0,0,.25),
+        inset 0 0 12px rgba(255,0,0,.08);
+
+    transition:.4s;
+}
+
+.portal-btn:hover{
+    transform:scale(1.05);
+}
+
+/* HORROR */
 
 body.horror .tile{
+
     opacity:.82;
+
     filter:
         brightness(.55)
         contrast(2)
@@ -79,141 +256,11 @@ body.horror .tile{
         tileFloat 1.2s infinite;
 }
 
-.tile{
-    background-size:cover;
-    background-position:center;
-    height:180px;
-    opacity:.65;
-    transition:.5s;
-    filter:blur(.3px);
-}
-
-/* ШУМ */
-
-.noise{
-    position:fixed;
-    inset:0;
-    background-image:
-    repeating-radial-gradient(
-        circle at center,
-        rgba(255,255,255,.03) 0px,
-        transparent 1px
-    );
-    opacity:.1;
-    animation:noise .15s infinite;
-}
-
-/* CRT */
-
-.scanlines{
-    position:fixed;
-    inset:0;
-    background:
-    repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,.03),
-        rgba(255,255,255,.03) 1px,
-        transparent 3px
-    );
-    opacity:.14;
-}
-
-/* КРАСНЫЕ SPLASH */
-
-.blood{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at 10% 15%, rgba(120,0,0,.18), transparent 18%),
-    radial-gradient(circle at 70% 80%, rgba(180,0,0,.16), transparent 20%),
-    radial-gradient(circle at 80% 20%, rgba(90,0,0,.14), transparent 15%);
-    mix-blend-mode:screen;
-}
-
-/* ТУМАН */
-
-.fog{
-    position:fixed;
-    inset:-20%;
-    background:
-    radial-gradient(circle,
-    rgba(255,0,0,.08),
-    transparent 50%);
-    filter:blur(100px);
-    animation:fog 12s infinite alternate;
-}
-
-/* ЖУТКИЙ ШРИФТ */
-
-.whispers{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:3;
-}
-
-.whispers span{
-    position:absolute;
-    color:rgba(255,0,0,.35);
-    font-family:'Creepster', cursive;
-    font-size:38px;
-    text-shadow:0 0 15px red;
-    animation:flicker 3s infinite;
-
-.whispers span{
-    position:absolute;
-    color:rgba(255,0,0,.28);
-    font-family:Georgia, serif;
-    font-size:30px;
-    letter-spacing:2px;
-    text-shadow:0 0 12px rgba(255,0,0,.35);
-    animation:flicker 3s infinite;
-}
-}
-
-.whispers span:nth-child(1){top:10%;left:20%;}
-.whispers span:nth-child(2){top:20%;left:70%;}
-.whispers span:nth-child(3){top:70%;left:30%;}
-.whispers span:nth-child(4){top:85%;left:10%;}
-.whispers span:nth-child(5){top:45%;left:80%;}
-
-
-
-/* КНОПКА */
-
-.container{
-    z-index:10;
-}
-
-.portal-btn{
-    font-family:Georgia, serif;
-    font-size:22px;
-    padding:22px 48px;
-    color:#ddd;
-    background:rgba(8,8,8,.72);
-    border:1px solid rgba(170,0,0,.4);
-    cursor:pointer;
-    letter-spacing:2px;
-    box-shadow:
-        0 0 30px rgba(180,0,0,.25),
-        inset 0 0 12px rgba(255,0,0,.08);
-    transition:.4s;
-}
-
-/* КЛИК */
-
-body.horror .tile{
-    animation:shake .15s infinite;
-    opacity:.9;
-    filter:
-        contrast(2)
-        brightness(.45)
-        hue-rotate(-20deg);
-}
-
 body.horror .portal-btn{
     animation:pulse .6s infinite;
 }
+
+/* ANIMATIONS */
 
 @keyframes wallDrift{
 
@@ -238,22 +285,12 @@ body.horror .portal-btn{
 
 @keyframes wallBreath{
 
-    0%,100%{
-        filter:brightness(1);
-    }
-
     50%{
         filter:brightness(1.08);
     }
 }
 
 @keyframes tileFloat{
-
-    0%,100%{
-        transform:
-            translateY(0)
-            scale(1);
-    }
 
     50%{
         transform:
@@ -280,5 +317,40 @@ body.horror .portal-btn{
         transform:
             translate(1px,-1px)
             rotate(.3deg);
+    }
+}
+
+@keyframes noise{
+    50%{
+        transform:translate(2px,-2px);
+    }
+}
+
+@keyframes fog{
+    to{
+        transform:
+            translate(5%,3%);
+    }
+}
+
+@keyframes flicker{
+    50%{
+        opacity:.7;
+    }
+}
+
+@keyframes whisperFloat{
+
+    50%{
+        transform:
+            translate(8px,-6px)
+            rotate(.5deg);
+    }
+}
+
+@keyframes pulse{
+    50%{
+        box-shadow:
+        0 0 80px red;
     }
 }
