@@ -7,43 +7,30 @@ const images=[
 "img/fuck6.jpg",
 "img/fuck7.jpg",
 "img/fuck8.jpg",
-    
 ];
 
 const wall=document.getElementById("tileWall");
 
-for(let i=0;i<70;i++){
+for(let i=0;i<90;i++){
 
-    const d=document.createElement("div");
-    d.className="tile";
+    const tile=document.createElement("div");
 
-    d.style.backgroundImage=
-        `url(${images[
-            Math.floor(Math.random()*images.length)
-        ]})`;
+    tile.className="tile";
 
-    wall.appendChild(d);
+    tile.style.backgroundImage=
+        `url(${
+            images[
+                Math.floor(
+                    Math.random()*images.length
+                )
+            ]
+        })`;
+
+    tile.style.animationDelay=
+        (Math.random()*8)+"s";
+
+    tile.style.opacity=
+        .35+Math.random()*.35;
+
+    wall.appendChild(tile);
 }
-
-/* ТВ ШУМ */
-
-const audio=new Audio(
-"https://actions.google.com/sounds/v1/alarms/tv_static.ogg"
-);
-
-const btn=document.getElementById("portalBtn");
-
-btn.onclick=()=>{
-
-    document.body.classList.add("horror");
-
-    audio.volume=.35;
-    audio.play();
-
-    btn.innerText="они смотрят";
-
-    setTimeout(()=>{
-        window.location.href=
-        "https://t.me/+KOEmylJiUcoyNmRi";
-    },3000);
-};
