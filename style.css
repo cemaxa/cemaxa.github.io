@@ -124,21 +124,18 @@ body{
 }
 
 .portal-btn{
-    font-family:'Creepster', cursive;
-    font-size:42px;
-    padding:20px 50px;
-    color:#ffdede;
-    background:rgba(0,0,0,.7);
-    border:1px solid #800;
+    font-family:Georgia, serif;
+    font-size:22px;
+    padding:22px 48px;
+    color:#ddd;
+    background:rgba(8,8,8,.72);
+    border:1px solid rgba(170,0,0,.4);
     cursor:pointer;
     letter-spacing:2px;
     box-shadow:
-        0 0 30px rgba(255,0,0,.35);
+        0 0 30px rgba(180,0,0,.25),
+        inset 0 0 12px rgba(255,0,0,.08);
     transition:.4s;
-}
-
-.portal-btn:hover{
-    transform:scale(1.05);
 }
 
 /* КЛИК */
