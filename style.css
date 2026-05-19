@@ -5,123 +5,37 @@
 }
 
 body{
-    background:#030303;
+    background:#050505;
     overflow:hidden;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     position:relative;
-    font-family:Georgia, serif;
 }
 
-/* МНОГО ГЛАЗ */
+/* ПЛИТКА ИЗ КРИПОВЫХ ЛИЦ */
 
-/* СЛОЙ ГЛАЗ */
-
-#eyesLayer{
+#tileWall{
     position:fixed;
-    inset:0;
-    overflow:hidden;
+    inset:-10%;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:0;
     z-index:0;
+    filter:
+        brightness(.35)
+        contrast(1.6)
+        saturate(.4);
 }
 
-/* ОТДЕЛЬНЫЙ ГЛАЗ */
-
-.eye{
-    position:absolute;
-    width:110px;
-    height:55px;
-    border-radius:100px;
-    background:
-        radial-gradient(circle at center,
-        #6b0000 0%,
-        #2a0000 18%,
-        #050505 45%,
-        #000 100%);
-    box-shadow:
-        0 0 15px rgba(255,0,0,.25),
-        inset 0 0 10px rgba(255,255,255,.05);
-    overflow:hidden;
-    opacity:.6;
-    filter:blur(.4px);
-}
-
-/* ВЕКО */
-
-.eye::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:100px;
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(255,255,255,.06),
-            rgba(0,0,0,.92)
-        );
-}
-
-/* ЗРАЧОК */
-
-.eye::after{
-    content:"";
-    position:absolute;
-    width:22px;
-    height:22px;
-    background:#000;
-    border:2px solid #950000;
-    border-radius:50%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    box-shadow:
-        0 0 18px rgba(255,0,0,.8);
-}
-
-/* МЕДЛЕННОЕ ДЫХАНИЕ */
-
-.eye{
-    animation:
-        eyePulse 6s ease-in-out infinite;
-}
-
-@keyframes eyePulse{
-    0%,100%{
-        transform:scale(1);
-        opacity:.45;
-    }
-    50%{
-        transform:scale(1.08);
-        opacity:.75;
-    }
-}
-
-/* ПОСЛЕ КЛИКА */
-
-body.horror .eye{
-    animation:
-        eyePulse 1s infinite,
-        eyeShake .15s infinite;
-}
-
-@keyframes eyeShake{
-    25%{transform:translate(2px,-2px)}
-    50%{transform:translate(-2px,2px)}
-    75%{transform:translate(1px,-1px)}
-}
-
-/* КРАСНОЕ СВЕЧЕНИЕ */
-
-.eyes::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle,
-        rgba(255,0,0,.12),
-        rgba(0,0,0,.65));
-    mix-blend-mode:screen;
+.tile{
+    background-size:cover;
+    background-position:center;
+    height:180px;
+    opacity:.65;
+    transition:.5s;
+    filter:blur(.3px);
 }
 
 /* ШУМ */
@@ -130,13 +44,13 @@ body.horror .eye{
     position:fixed;
     inset:0;
     background-image:
-        repeating-radial-gradient(
-            circle at center,
-            rgba(255,255,255,.02) 0px,
-            transparent 1px
-        );
+    repeating-radial-gradient(
+        circle at center,
+        rgba(255,255,255,.03) 0px,
+        transparent 1px
+    );
     opacity:.1;
-    animation:noise .18s infinite;
+    animation:noise .15s infinite;
 }
 
 /* CRT */
@@ -145,15 +59,25 @@ body.horror .eye{
     position:fixed;
     inset:0;
     background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,.03),
-            rgba(255,255,255,.03) 1px,
-            transparent 2px,
-            transparent 4px
-        );
-    opacity:.15;
-    pointer-events:none;
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.03) 1px,
+        transparent 3px
+    );
+    opacity:.14;
+}
+
+/* КРАСНЫЕ SPLASH */
+
+.blood{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 10% 15%, rgba(120,0,0,.18), transparent 18%),
+    radial-gradient(circle at 70% 80%, rgba(180,0,0,.16), transparent 20%),
+    radial-gradient(circle at 80% 20%, rgba(90,0,0,.14), transparent 15%);
+    mix-blend-mode:screen;
 }
 
 /* ТУМАН */
@@ -162,41 +86,36 @@ body.horror .eye{
     position:fixed;
     inset:-20%;
     background:
-        radial-gradient(circle at 30% 40%,
-        rgba(255,0,0,.08),
-        transparent 40%);
-    filter:blur(90px);
-    animation:fog 14s infinite alternate;
+    radial-gradient(circle,
+    rgba(255,0,0,.08),
+    transparent 50%);
+    filter:blur(100px);
+    animation:fog 12s infinite alternate;
 }
 
-/* ВИНЬЕТКА */
-
-.vignette{
-    position:fixed;
-    inset:0;
-    background:
-        radial-gradient(circle,
-        transparent 20%,
-        rgba(0,0,0,.95));
-}
-
-/* КРИПИ-ТЕКСТ */
+/* ЖУТКИЙ ШРИФТ */
 
 .whispers{
     position:fixed;
     inset:0;
-    z-index:2;
     pointer-events:none;
+    z-index:3;
 }
 
 .whispers span{
     position:absolute;
-    color:rgba(255,0,0,.3);
-    font-size:24px;
-    letter-spacing:2px;
-    text-shadow:0 0 10px rgba(255,0,0,.4);
+    color:rgba(255,0,0,.35);
+    font-family:'Creepster', cursive;
+    font-size:38px;
+    text-shadow:0 0 15px red;
     animation:flicker 3s infinite;
 }
+
+.whispers span:nth-child(1){top:10%;left:20%;}
+.whispers span:nth-child(2){top:20%;left:70%;}
+.whispers span:nth-child(3){top:70%;left:30%;}
+.whispers span:nth-child(4){top:85%;left:10%;}
+.whispers span:nth-child(5){top:45%;left:80%;}
 
 /* КНОПКА */
 
@@ -205,94 +124,61 @@ body.horror .eye{
 }
 
 .portal-btn{
-    background:rgba(8,8,8,.72);
-    color:#ddd;
-    border:1px solid rgba(170,0,0,.4);
-    padding:22px 48px;
-    font-size:22px;
-    letter-spacing:2px;
+    font-family:'Creepster', cursive;
+    font-size:42px;
+    padding:20px 50px;
+    color:#ffdede;
+    background:rgba(0,0,0,.7);
+    border:1px solid #800;
     cursor:pointer;
+    letter-spacing:2px;
     box-shadow:
-        0 0 30px rgba(180,0,0,.25),
-        inset 0 0 12px rgba(255,0,0,.08);
+        0 0 30px rgba(255,0,0,.35);
     transition:.4s;
 }
 
 .portal-btn:hover{
     transform:scale(1.05);
-    box-shadow:
-        0 0 50px rgba(255,0,0,.55);
 }
 
-/* ПОСЛЕ КЛИКА */
+/* КЛИК */
 
-body.horror .eyes{
-    animation:
-        shake .12s infinite,
-        eyeMove 2s linear infinite;
-    opacity:.75;
+body.horror .tile{
+    animation:shake .15s infinite;
+    opacity:.9;
     filter:
-        contrast(2.4)
-        brightness(.55)
-        hue-rotate(-50deg);
-}
-
-body.horror .whispers span{
-    color:rgba(255,0,0,.6);
-    transform:scale(1.15);
+        contrast(2)
+        brightness(.45)
+        hue-rotate(-20deg);
 }
 
 body.horror .portal-btn{
-    animation:
-        tremble .08s infinite,
-        pulse .7s infinite;
-}
-
-/* АНИМАЦИИ */
-
-@keyframes eyeMove{
-    from{background-position:0 0;}
-    to{background-position:400px 300px;}
-}
-
-@keyframes breathe{
-    50%{transform:scale(1.03);}
+    animation:pulse .6s infinite;
 }
 
 @keyframes noise{
-    0%{transform:translate(0)}
     50%{transform:translate(2px,-2px)}
-    100%{transform:translate(-2px,2px)}
 }
 
 @keyframes fog{
-    from{
-        transform:translate(-4%,-3%);
-    }
     to{
-        transform:translate(4%,3%);
+        transform:translate(5%,3%);
     }
 }
 
 @keyframes flicker{
-    0%,100%{opacity:.25}
-    50%{opacity:.7}
-}
-
-@keyframes tremble{
-    25%{transform:translate(-2px,1px)}
-    50%{transform:translate(2px,-1px)}
-    75%{transform:translate(-1px,-2px)}
+    50%{
+        opacity:.75;
+    }
 }
 
 @keyframes shake{
     25%{transform:translate(2px,-2px)}
     50%{transform:translate(-2px,2px)}
-    75%{transform:translate(1px,-1px)}
 }
 
 @keyframes pulse{
     50%{
-        box-shadow:0 0 80px rgba(255,0,0,.8);
+        box-shadow:0 0 80px red;
     }
 }
